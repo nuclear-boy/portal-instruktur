@@ -39,27 +39,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
+    const token = getToken();
+    const metaPromise = api.getMeta().catch(() => null);
+
+    if (!token) {
+      setLoading(false);
+      void metaPromise.then((metaResult) => {
+        if (!cancelled && metaResult) updateMeta(metaResult.meta);
+      });
+      return () => {
+        cancelled = true;
+      };
+    }
+
     (async () => {
-      const metaPromise = api.getMeta().catch(() => null);
-      if (!getToken()) {
-        const metaResult = await metaPromise;
-        if (!cancelled) {
-          if (metaResult) updateMeta(metaResult.meta);
-          setLoading(false);
-        }
-        return;
-      }
       try {
-        const [meResult, metaResult] = await Promise.all([api.me(), metaPromise]);
-        if (!cancelled) {
-          setUser(meResult.user);
-          if (metaResult) updateMeta(metaResult.meta);
-        }
+        const meResult = await api.me();
+        if (!cancelled) setUser(meResult.user);
       } catch {
         setToken(null);
       } finally {
         if (!cancelled) setLoading(false);
       }
+      const metaResult = await metaPromise;
+      if (!cancelled && metaResult) updateMeta(metaResult.meta);
     })();
     return () => {
       cancelled = true;

@@ -89,6 +89,11 @@ async def unhandled_error_handler(_: Request, error: Exception):
     return JSONResponse(status_code=500, content={"error": "Terjadi kesalahan pada server"})
 
 
+@app.get("/")
+async def root():
+    return {"service": APP_NAME, "ok": True, "health": "/api/health"}
+
+
 @app.get("/api/health")
 async def health():
     from db import using_redis

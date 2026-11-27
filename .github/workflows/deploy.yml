@@ -41,8 +41,10 @@ jobs:
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Buat SPA fallback 404.html untuk GitHub Pages
-        run: cp dist/index.html dist/404.html
+      - name: Buat SPA fallback 404.html dan .nojekyll untuk GitHub Pages
+        run: |
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

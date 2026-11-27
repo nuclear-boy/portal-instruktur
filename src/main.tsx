@@ -8,9 +8,11 @@ import { ToastProvider } from './context/ToastContext';
 import './styles/app.css';
 import './styles/sosiogram.css';
 
-if (localStorage.getItem('lbt-theme') === 'dark') {
-  document.documentElement.dataset.theme = 'dark';
-}
+try {
+  if (localStorage.getItem('lbt-theme') === 'dark') {
+    document.documentElement.dataset.theme = 'dark';
+  }
+} catch {}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

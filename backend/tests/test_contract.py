@@ -93,6 +93,10 @@ def create_user(client: TestClient, auth: dict, role: str, email: str, local_id:
     return client.post("/api/admin/users", json=payload, headers=auth)
 
 def test_meta_is_public_and_cors_preflight(client: TestClient):
+    root_res = client.get("/")
+    assert root_res.status_code == 200
+    assert root_res.json()["ok"] is True
+
     response = client.get("/api/meta")
     assert response.status_code == 200
     assert response.json()["meta"]["eventName"]
