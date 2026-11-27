@@ -1,0 +1,36 @@
+{
+  "name": "portal-instruktur-lbt",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Portal Instruktur Leadership Basic Training Pelajar Islam Indonesia",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "api:install": "python -m venv backend/.venv && backend\\.venv\\Scripts\\python -m pip install -r backend/requirements.txt -r backend/requirements-dev.txt",
+    "api:dev": "backend\\.venv\\Scripts\\python -m uvicorn app:app --reload --port 8000 --app-dir backend",
+    "api:test": "backend\\.venv\\Scripts\\python -m pytest backend/tests -q",
+    "seed:admin": "backend\\.venv\\Scripts\\python backend/seed.py admin",
+    "seed:koordinator": "backend\\.venv\\Scripts\\python backend/seed.py koordinator",
+    "seed:speakers": "backend\\.venv\\Scripts\\python backend/seed.py speakers",
+    "admin:permanent": "backend\\.venv\\Scripts\\python backend/admin_permanent.py"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^2.13.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}

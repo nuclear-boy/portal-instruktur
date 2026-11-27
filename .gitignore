@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.venv/
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# build output
+dist/
+dist-ssr/
+coverage/
+
+# environment & secrets
+.env
+.env.*
+!.env.example
+*.local
+.vercel/
+
+# data pribadi / ekspor / backup (jangan pernah masuk repo)
+data/
+exports/
+backups/
+*.csv
+*.xlsx
+*.xls
+
+# logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# dokumen internal & catatan lokal
+*.docx
+*.docx.md
+skill.md
